@@ -1,0 +1,72 @@
+---
+title: "eds212_day4_comp"
+author: "Jake Eisaguirre"
+date: "8/5/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Creating matrices in R
+
+Use the `matrix()` functionn to wrap a series of values (a vector) into a matrix
+
+- Use `nrow = ` to specify number of rows
+- use `ncol = ` to specify number of columns
+- use `byrow = TRUE ` to populate the matrix by rows instead of columns 
+
+```{r}
+
+dogs <- c(1 ,5, 5, 2, 6, 21, 556, 23, 45, 100)
+
+#Wrap dogs into a matrix
+dog_matrix <- matrix(data = dogs, nrow = 4, ncol = 5, byrow = TRUE)
+
+```
+
+```{r}
+
+dogs_2 <- matrix( data = c(1, 0 , 2, 3), nrow = 2, ncol = 2, byrow = TRUE)
+dogs_3 <- matrix( data = c(1, 4, 2, 0), nrow = 2, ncol = 2, byrow = TRUE)
+
+dogs_3 + dogs_2
+
+dogs_3 - dogs_2
+
+4 * dogs_2
+
+dogs_2 %*% dogs_3
+                  
+
+```
+
+## Leslie Matrix
+```{r}
+
+Lcoef <- matrix(data = c(0, 0, 600, 0.2, 0, 0, 0, 0.08, 0.6), nrow = 3, ncol = 3, byrow = TRUE)
+Lcoef
+
+#specify the initial conditions
+#what is the population inn each life stage at year 0?
+
+insect_y0 <- c(12000, 700, 500)
+
+#project the population in each life stage for year 1
+
+insect_y1 <- Lcoef %*% insect_y0
+insect_y1
+
+#project the population in each life stafe for year 2, 3, 4
+insect_y2 <- Lcoef %*% insect_y1
+insect_y2
+
+insect_y3 <- Lcoef %*% insect_y2
+insect_y3
+
+insect_y4 <- Lcoef %*% insect_y3
+insect_y4
+
+```
+
